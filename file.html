@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Series & Video Suggestor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .suggestions-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      color: #2d2d2d;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Suggested Series & Videos</h1>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search for a show or keyword..." onkeyup="filterCards()" />
+  </div>
+
+  <div class="suggestions-container" id="suggestionsContainer">
+
+    <div class="card">
+      <h3>Queen of Tears</h3>
+      <p>A heartwarming love story that weaves through emotional ups and downs.</p>
+    </div>
+
+    <div class="card">
+      <h3>Miss Night and Day</h3>
+      <p>A quirky tale of transformation and mystery between day and night.</p>
+    </div>
+
+    <div class="card">
+      <h3>My Demon</h3>
+      <p>A fantasy drama filled with magic, reincarnation, and epic battles of destiny.</p>
+    </div>
+
+    <div class="card">
+      <h3>Vinchenzo</h3>
+      <p>A brilliant autistic lawyer navigates challenges in law and life with heart and humor.</p>
+    </div>
+
+  </div>
+
+  <script>
+    function filterCards() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const desc = card.querySelector("p").textContent.toLowerCase();
+        const show = title.includes(input) || desc.includes(input);
+        card.style.display = show ? "block" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>
